@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IWQCVV 2025 - Session Detail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>IWQCVV 2025</h1>
+        <p class="conference-subtitle">International Workshop on Quantum Computing, Verification and Validation</p>
+        <p class="conference-date">Session Detail</p>
+    </header>
+
+    <div class="container">
+        <a href="javascript:history.back()" class="back-link">← Back to Schedule</a>
+        
+        <div class="detail-content">
+            <div id="sessionInfo">
+                <!-- 内容将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取URL参数
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // 所有会话数据模板
+        const sessionData = {
+            // Tuesday Sessions
+            'tuesday-registration': {
+                speaker: 'Registration',
+                affiliation: 'Conference Registration',
+                title: 'Registration',
+                time: '12:00 - 18:00',
+                abstract: 'xxxx'
+            },
+
+            // Wednesday Sessions
+            'quantum-nonlocality': {
+                speaker: 'Qiongyi He',
+                affiliation: 'Peking University',
+                title: 'Quantum nonlocality and quantum randomness',
+                time: '08:30 - 09:00',
+                abstract: 'Randomness is a fundamental resource that plays a crucial role in quantum cryptography and scientific research. Quantum nonlocality—a key property that distinguishes quantum physics from classical theories—offers a powerful tool to ensure that generated true random numbers cannot be accurately predicted by an adversary. For instance, quantum steering and Bell nonlocality enable randomness certification in one-sided device-independent (1SDI) and fully device-independent (DI) scenarios, respectively. Existing theoretical and experimental efforts have mostly focused on bipartite systems. However, motivated by the practical need for scalable quantum networks and the advantages of multipartite high-dimensional entangled states in securing information and enhancing channel capacities, an open question is how to certify randomness in multipartite quantum systems securely. To address this challenge, we first propose a randomness certification protocol in 1SDI scenario tailored for quantum networks. Compared to traditional bipartite schemes, our approach can certify a higher amount of randomness and applies universally to quantum systems with arbitrary encoding dimensions, covering both discrete- and continuous-variable systems. We rigorously prove that when the steering party performs only two measurement settings, quantum nonlocality becomes both a necessary and sufficient condition for randomness generation. However, this sufficiency fails in the case of more than two measurement settings: there exist quantum systems that exhibit steering under multiple measurements but cannot be used for 1SDI randomness generation. These findings answer long-standing questions regarding the relationship between quantum correlations and randomness, and provide deeper insight into the physical origin of quantum randomness. The results further confirmed that not all Bell violations are sufficient for randomness generation, highlighting the advantage of high-dimensional quantum systems. To further clarify the necessary and sufficient conditions for certifying quantum randomness and explore its connection to quantum nonlocality, we focused on the bipartite scenario and introduced a framework based on measurement incompatibility structures. We proved that, the 1SDI randomness can be certified if and only if the correlations arise from a measurement compatibility structure that is not isomorphic to a hypergraph containing a star subgraph. In such a structure, the central measurement is individually compatible with the measurements at branch sites, precluding certifiable randomness in the central measurement outcomes. We extended this result to the fully DI scenario and proved that any violation of a chained Bell inequality rules out such a compatibility structure, thereby ensuring its role as a valid witness for randomness certification'
+            },
+            'relative-belief-inference': {
+                speaker: 'Luis Lorenzo Sánchez-Soto',
+                affiliation: 'University of Seville',
+                title: 'Relative-belief inference in quantum information theory',
+                time: '09:00 - 09:30',
+                abstract: 'xxxx'
+            },
+            'gate-calibration': {
+                speaker: 'Hui Khoon Ng',
+                affiliation: 'National University of Singapore',
+                title: 'Real-time context-aware gate calibration with reinforcement learning',
+                time: '09:30 - 10:00',
+                abstract: 'xxxx'
+            },
+            'high-dimensional-states': {
+                speaker: 'Bi-Heng Liu',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Preparation and certification of high-dimensional quantum states',
+                time: '10:30 - 11:00',
+                abstract: 'xxxx'
+            },
+            'nonlocal-games': {
+                speaker: 'Penghui Yao',
+                affiliation: 'Tsinghua University',
+                title: 'Nonlocal Games and Self-tests in the Presence of Noise',
+                time: '11:00 - 11:30',
+                abstract: 'xxxx'
+            },
+            'equivalence-checking': {
+                speaker: 'Zhaohui Wei',
+                affiliation: 'Sun Yat-sen University',
+                title: 'Equivalence Checking of Quantum Circuits by Nonlocality',
+                time: '11:30 - 12:00',
+                abstract: 'xxxx'
+            },
+            'quantum-non-markovianity': {
+                speaker: 'Mile Gu',
+                affiliation: 'Nanyang Technological University',
+                title: 'Witnessing Quantum Non-Markovianity without Active Interventions',
+                time: '14:00 - 14:30',
+                abstract: 'xxxx'
+            },
+            'bayesian-parameter-estimation': {
+                speaker: 'Jun Suzuki',
+                affiliation: 'University of Electro-Communications',
+                title: 'Lower Bounds for Bayesian Parameter Estimation about Quantum States',
+                time: '14:30 - 15:00',
+                abstract: 'xxxx'
+            },
+            'cross-platform-quantum': {
+                speaker: 'Jianxin Chen',
+                affiliation: 'Alibaba Quantum Laboratory',
+                title: 'Unifying Quantum Computing: The Quest for a Cross-Platform Quantum Instruction Set',
+                time: '15:00 - 15:30',
+                abstract: 'xxxx'
+            },
+            'long-range-nonstabilizerness': {
+                speaker: 'Zi-Wen Liu',
+                affiliation: 'Perimeter Institute for Theoretical Physics',
+                title: 'Long-range nonstabilizerness from quantum codes, orders, and correlations',
+                time: '16:00 - 16:30',
+                abstract: 'xxxx'
+            },
+            'krylov-shadow-tomography': {
+                speaker: 'Da-Jian Zhang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Krylov Shadow Tomography: Efficient Estimation of Quantum Fisher Information',
+                time: '16:30 - 17:00',
+                abstract: 'xxxx'
+            },
+            'cross-platform-similarity': {
+                speaker: 'Bujiao Wu',
+                affiliation: 'Tsinghua University',
+                title: 'Cross-platform Similarity in Modular Superconducting Quantum Processors with Classical Communications',
+                time: '17:00 - 17:30',
+                abstract: 'xxxx'
+            },
+            'exceptional-points': {
+                speaker: 'Kunkun Wang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Experimental observation of exceptional points with single photons',
+                time: '17:30 - 18:00',
+                abstract: 'xxxx'
+            },
+
+            // Thursday Sessions
+            'postselected-amplification': {
+                speaker: 'Xin-Qi Li',
+                affiliation: 'Peking University',
+                title: 'Postselected amplification applied to quantum precision measurement',
+                time: '08:30 - 09:00',
+                abstract: 'xxxx'
+            },
+            'efficient-parameter-estimation': {
+                speaker: 'Guo-Yong Xiang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Efficient Parameter Estimation and Quantum Information Extraction',
+                time: '09:00 - 09:30',
+                abstract: 'xxxx'
+            },
+            'quantum-system-learning': {
+                speaker: 'Hong-Ye Hu',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Recent Advances in Quantum System Learning — Noise-robust shallow shadow and Heisenberg-Limited Hamiltonian Learning',
+                time: '09:30 - 10:00',
+                abstract: 'xxxx'
+            },
+            'quantumness-related': {
+                speaker: 'Shao-Ming Fei',
+                affiliation: 'Capital Normal University',
+                title: 'Quantumness and Related',
+                time: '10:30 - 11:00',
+                abstract: 'xxxx'
+            },
+            'non-equilibrium-criticality': {
+                speaker: 'Abolfazl Bayat',
+                affiliation: 'University of Massachusetts Boston',
+                title: 'Non-Equilibrium Criticality-Enhanced Quantum Sensing',
+                time: '11:00 - 11:30',
+                abstract: 'xxxx'
+            },
+            'quantum-parameter-estimation': {
+                speaker: 'Xiao-Ming Lu',
+                affiliation: 'Sun Yat-sen University',
+                title: 'Quantum Parameter Estimation Uncertainty Relation',
+                time: '11:30 - 12:00',
+                abstract: 'xxxx'
+            },
+            'state-estimation-pairs': {
+                speaker: 'Berge Englert',
+                affiliation: 'National University of Singapore',
+                title: 'State estimation from pairs of states',
+                time: '14:00 - 14:30',
+                abstract: 'xxxx'
+            },
+            'gate-dependent-noise': {
+                speaker: 'Ingo Roth',
+                affiliation: 'Max Planck Institute for Quantum Optics',
+                title: 'Learning of and with gate-dependent noise',
+                time: '14:30 - 15:00',
+                abstract: 'xxxx'
+            },
+            'classical-shadows-pauli': {
+                speaker: 'Dax Enshan Koh',
+                affiliation: 'National University of Singapore',
+                title: 'Classical shadows with Pauli-invariant unitary ensembles',
+                time: '15:00 - 15:30',
+                abstract: 'xxxx'
+            },
+            'poster-session': {
+                speaker: 'Poster Session',
+                affiliation: 'Conference Exhibition',
+                title: 'Coffee break and Poster Session',
+                time: '15:30 - 18:00',
+                abstract: 'xxxx'
+            },
+            'shuttle-bus': {
+                speaker: 'Transportation',
+                affiliation: 'Conference Shuttle',
+                title: 'Shuttle bus departure',
+                time: '18:15',
+                abstract: 'xxxx'
+            },
+            'banquet': {
+                speaker: 'Conference Banquet',
+                affiliation: 'Banquet Venue',
+                title: 'Banquet',
+                time: '18:30',
+                abstract: 'xxxx'
+            },
+
+            // Friday Sessions
+            'quantum-sensing-many-body': {
+                speaker: 'Xinhua Peng',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Quantum sensing of complex quantum many-body systems',
+                time: '08:30 - 09:00',
+                abstract: 'xxxx'
+            },
+            'open-quantum-systems': {
+                speaker: 'Yiheng Li',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Experimental Progress on Open Quantum Systems with Trapped Ions',
+                time: '09:00 - 09:30',
+                abstract: 'xxxx'
+            },
+            'device-independent-qkd': {
+                speaker: 'Ye Wang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Device-independent quantum key distribution over metropolitan distances',
+                time: '09:30 - 10:00',
+                abstract: 'xxxx'
+            },
+            'em-algorithm-boltzmann': {
+                speaker: 'Masahito Hayashi',
+                affiliation: 'Nagoya University',
+                title: 'An EM algorithm for quantum Boltzmann machines',
+                time: '10:30 - 11:00',
+                abstract: 'xxxx'
+            },
+            'randomness-symmetry': {
+                speaker: 'Nobuyuki Yoshioka',
+                affiliation: 'University of Tokyo',
+                title: 'Randomness and symmetry for quantum computation',
+                time: '11:00 - 11:30',
+                abstract: 'xxxx'
+            },
+            'hybrid-entanglement': {
+                speaker: 'Pan-Yu Hou',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Hybrid entanglement and error correction in a scalable quantum network node',
+                time: '11:30 - 12:00',
+                abstract: 'xxxx'
+            },
+            'superconducting-simulation': {
+                speaker: 'Heng Fan',
+                affiliation: 'Institute of Physics, Chinese Academy of Sciences',
+                title: 'Superconducting Quantum Simulation',
+                time: '14:00 - 14:30',
+                abstract: 'xxxx'
+            },
+            'compressive-tomography': {
+                speaker: 'Yong Siah Teo',
+                affiliation: 'National University of Singapore',
+                title: 'Modern Compressive Tomography and Relative-Belief-Based Certification',
+                time: '14:30 - 15:00',
+                abstract: 'xxxx'
+            },
+            'error-resilient-reversal': {
+                speaker: 'Pengfei Zhang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Error-resilient Reversal of Quantum Chaotic Dynamics Enabled by Scramblons',
+                time: '15:00 - 15:30',
+                abstract: 'xxxx'
+            },
+            'precision-limits-sensing': {
+                speaker: 'Jing Yang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Precision Limits in Postselected Quantum Sensing',
+                time: '16:00 - 16:30',
+                abstract: 'xxxx'
+            },
+            'distillation-catalysts': {
+                speaker: 'Kun Fang',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Surpassing the fundamental limits of distillation with catalysts',
+                time: '16:30 - 17:00',
+                abstract: 'xxxx'
+            },
+            'sequence-model-measurement': {
+                speaker: 'Ya-Dong Wu',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Sequence-Model-Guided Measurement Selection for Quantum State Learning',
+                time: '17:00 - 17:30',
+                abstract: 'xxxx'
+            },
+            'quantum-telepathy': {
+                speaker: 'Dawei Ding',
+                affiliation: 'University of Science and Technology of China',
+                title: 'Coordinating Decisions via Quantum Telepathy',
+                time: '17:30 - 18:00',
+                abstract: 'xxxx'
+            }
+        };
+
+        // 加载会话详情
+        function loadSessionDetail() {
+            const sessionId = getUrlParameter('session');
+            const speaker = getUrlParameter('speaker');
+            const title = getUrlParameter('title');
+            const time = getUrlParameter('time');
+            
+            const sessionInfo = document.getElementById('sessionInfo');
+            
+            if (sessionId && sessionData[sessionId]) {
+                const data = sessionData[sessionId];
+                
+                // 创建安全的HTML内容，避免XSS攻击
+                const safeSpeaker = document.createTextNode(data.speaker).textContent;
+                const safeAffiliation = document.createTextNode(data.affiliation).textContent;
+                const safeTitle = document.createTextNode(data.title).textContent;
+                const safeTime = document.createTextNode(data.time).textContent;
+                const safeAbstract = document.createTextNode(data.abstract).textContent;
+                
+                sessionInfo.innerHTML = `
+                    <h2>${safeTitle}</h2>
+                    
+                    <div class="detail-info">
+                        <p><strong>Time:</strong> ${safeTime}</p>
+                        <p><strong>Speaker:</strong> ${safeSpeaker}</p>
+                        <p><strong>Affiliation:</strong> ${safeAffiliation}</p>
+                    </div>
+                    
+                    <div class="detail-description">
+                        <h3>Abstract</h3>
+                        <p>${safeAbstract}</p>
+                    </div>
+                `;
+            } else {
+                // 如果没有找到会话数据，显示基本信息
+                const safeSpeaker = document.createTextNode(speaker || 'TBD').textContent;
+                const safeTitle = document.createTextNode(title || 'Session Detail').textContent;
+                const safeTime = document.createTextNode(time || 'TBD').textContent;
+                
+                sessionInfo.innerHTML = `
+                    <h2>${safeTitle}</h2>
+                    
+                    <div class="detail-info">
+                        <p><strong>Time:</strong> ${safeTime}</p>
+                        <p><strong>Speaker:</strong> ${safeSpeaker}</p>
+                    </div>
+                    
+                    <div class="detail-description">
+                        <p>Detailed information for this session will be available soon.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', loadSessionDetail);
+    </script>
+
+</body>
+</html>
