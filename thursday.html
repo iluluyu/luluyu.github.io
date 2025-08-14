@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IWQCVV 2025 - Thursday Schedule</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>IWQCVV 2025</h1>
+        <p class="conference-subtitle">International Workshop on Quantum Computing, Verification and Validation</p>
+        <p class="conference-date">Thursday, August 21, 2025</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Speaker</th>
+                    <th>Talk Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="session-row" data-session-id="postselected-amplification">
+                    <td class="time-slot" data-label="Time">08:30 - 09:00</td>
+                    <td data-label="Speaker">Xin-Qi Li</td>
+                    <td data-label="Talk Title">Postselected amplification applied to quantum precision measurement</td>
+                </tr>
+                <tr class="session-row" data-session-id="efficient-parameter-estimation">
+                    <td class="time-slot" data-label="Time">09:00 - 09:30</td>
+                    <td data-label="Speaker">Guo-Yong Xiang</td>
+                    <td data-label="Talk Title">Efficient Parameter Estimation and Quantum Information Extraction</td>
+                </tr>
+                <tr class="session-row" data-session-id="quantum-system-learning">
+                    <td class="time-slot" data-label="Time">09:30 - 10:00</td>
+                    <td data-label="Speaker">Hong-Ye Hu</td>
+                    <td data-label="Talk Title">Recent Advances in Quantum System Learning — Noise-robust shallow shadow and Heisenberg-Limited Hamiltonian Learning</td>
+                </tr>
+                <tr class="break-row">
+                    <td class="time-slot" data-label="Time">10:00 - 10:30</td>
+                    <td class="break registration" data-label="Speaker">Registration, Coffee break</td>
+                    <td data-label="Talk Title">-</td>
+                </tr>
+                <tr class="session-row" data-session-id="quantumness-related">
+                    <td class="time-slot" data-label="Time">10:30 - 11:00</td>
+                    <td data-label="Speaker">Shao-Ming Fei</td>
+                    <td data-label="Talk Title">Quantumness and Related</td>
+                </tr>
+                <tr class="session-row" data-session-id="non-equilibrium-criticality">
+                    <td class="time-slot" data-label="Time">11:00 - 11:30</td>
+                    <td data-label="Speaker">Abolfazl Bayat</td>
+                    <td data-label="Talk Title">Non-Equilibrium Criticality-Enhanced Quantum Sensing</td>
+                </tr>
+                <tr class="session-row" data-session-id="quantum-parameter-estimation">
+                    <td class="time-slot" data-label="Time">11:30 - 12:00</td>
+                    <td data-label="Speaker">Xiao-Ming Lu</td>
+                    <td data-label="Talk Title">Quantum Parameter Estimation Uncertainty Relation</td>
+                </tr>
+                <tr class="break-row">
+                    <td class="time-slot" data-label="Time">12:00 - 14:00</td>
+                    <td class="break lunch" data-label="Speaker">Lunch</td>
+                    <td data-label="Talk Title">-</td>
+                </tr>
+                <tr class="session-row" data-session-id="state-estimation-pairs">
+                    <td class="time-slot" data-label="Time">14:00 - 14:30</td>
+                    <td data-label="Speaker">Berge Englert</td>
+                    <td data-label="Talk Title">State estimation from pairs of states</td>
+                </tr>
+                <tr class="session-row" data-session-id="gate-dependent-noise">
+                    <td class="time-slot" data-label="Time">14:30 - 15:00</td>
+                    <td data-label="Speaker">Ingo Roth</td>
+                    <td data-label="Talk Title">Learning of and with gate-dependent noise</td>
+                </tr>
+                <tr class="session-row" data-session-id="classical-shadows-pauli">
+                    <td class="time-slot" data-label="Time">15:00 - 15:30</td>
+                    <td data-label="Speaker">Dax Enshan Koh</td>
+                    <td data-label="Talk Title">Classical shadows with Pauli-invariant unitary ensembles</td>
+                </tr>
+                <tr class="break-row">
+                    <td class="time-slot" data-label="Time">15:30 - 18:00</td>
+                    <td class="break coffee" data-label="Speaker">Coffee break and Poster Session</td>
+                    <td data-label="Talk Title">-</td>
+                </tr>
+                <tr class="break-row">
+                    <td class="time-slot" data-label="Time">18:15</td>
+                    <td class="break special" data-label="Speaker">Shuttle bus departure</td>
+                    <td data-label="Talk Title">To banquet venue</td>
+                </tr>
+                <tr class="break-row">
+                    <td class="time-slot" data-label="Time">18:30</td>
+                    <td class="break special" data-label="Speaker">Banquet</td>
+                    <td data-label="Talk Title">Conference dinner</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 为演讲行添加点击事件
+        document.querySelectorAll('.session-row').forEach(row => {
+            row.addEventListener('click', function() {
+                const sessionId = this.dataset.sessionId;
+                const speaker = this.querySelector('[data-label="Speaker"]').textContent;
+                const title = this.querySelector('[data-label="Talk Title"]').textContent;
+                const time = this.querySelector('.time-slot').textContent;
+                
+                // 跳转到详情页面
+                window.location.href = `session-detail.html?session=${sessionId}&speaker=${encodeURIComponent(speaker)}&title=${encodeURIComponent(title)}&time=${encodeURIComponent(time)}`;
+            });
+        });
+    </script>
+
+</body>
+</html> 
